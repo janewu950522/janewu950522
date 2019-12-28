@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)https://bit.webduino.io/blockly/live-preview.html#-LxATDzAMLGdNj56JmaU -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Webduino Blockly Demo 02</title>
+  <script src="./Webduino Blockly Demo 02_files/jquery.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 02_files/webduino-all.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 02_files/MessageTransport.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 02_files/webduino-blockly.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 02_files/firebase.min.js.下載"></script>
+  <script src="./Webduino Blockly Demo 02_files/runtime.min.js.下載"></script><script src="./Webduino Blockly Demo 02_files/main.js.下載"></script>
+
+  <style>#demo-area-02-light img {
+  height: 400px;
+  display: none;
+  pointer-events: auto!important;
+}
+
+#demo-area-02-light.on #demo-area-02-on {
+  display: inline-block;
+  pointer-events: auto!important;
+}
+
+#demo-area-02-light.off #demo-area-02-off {
+  display: inline-block;
+  pointer-events: auto!important;
+}</style>
+</head>
+
+<body>
+  <div><div id="demo-area-02-light" class="off">
+    <img src="./Webduino Blockly Demo 02_files/off.jpg" id="demo-area-02-off">
+    <img src="https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjto6L279fmAhWewosBHXz0BggQjRx6BAgBEAQ&url=https%3A%2F%2Fglobal.rakuten.com%2Fen%2Fstore%2Fgrengren%2Fitem%2F100005753%2F&psig=AOvVaw0r-Kznz9QXq8poU1tULLwG&ust=1577604998640046" id="demo-area-02-on">
+  </div></div>
+
+  <script>var linebot;
+
+
+var firebase1ca6d;
+var flag1ca6d=true;
+linebot = {token:'izMcAPtsDYM/Lei1VQlhIUus20EqMqkwID19ZPtbzBAf31joVaI7NG5PW3s9NsNnyAoze0TspYjnRG7Z1+1ArrcG02gW016koIOxvs+4+JDDhDGRe7cOW75UfI9iP5SYh9Dr0+OEk6dvZnZCZ4Ce8gdB04t89/1O/w1cDnyilFU=',userId:'U1972ecef8c20864c0f851368931db613',onVal:''};
+firebase1ca6d = new Firebase('https://webduino-linebot-1ca6d.firebaseio.com/');
+firebase1ca6d.on('value',function(s){
+  var msg1ca6d=false;
+  if(flag1ca6d){
+    flag1ca6d=false;
+    return;
+  }
+  else {
+    s.forEach(function(e){
+      if(e.val().userid===linebot.userId && e.val().message!==''){
+        linebot.onVal = e.val().message;
+        msg1ca6d=true;}
+    });
+    if(!msg1ca6d) return;
+  }
+  if (linebot.onVal == 'hi') {
+    line_bot($.extend({},linebot,{message:'Hello'}));
+  }
+  if (linebot.onVal == 'on') {
+    line_bot($.extend({},linebot,{message:'Yes Sir！'}));
+    document.getElementById("demo-area-02-light").className = "on";
+    line_bot($.extend({},linebot,{message:'Light on'}));
+  }
+  if (linebot.onVal == 'off') {
+    line_bot($.extend({},linebot,{message:'Yes Sir！'}));
+    document.getElementById("demo-area-02-light").className = "off";
+    line_bot($.extend({},linebot,{message:'Light off'}));
+  }
+});
+document.getElementById("demo-area-02-light").addEventListener("click", function(){
+  if (document.getElementById("demo-area-02-light").className == "on") {
+     document.getElementById("demo-area-02-light").className = "off";
+  } else {
+    document.getElementById("demo-area-02-light").className = "on";
+  }
+  if (document.getElementById("demo-area-02-light").className == "on") {
+    line_bot($.extend({},linebot,{message:'Turn on'}));
+  }
+  if (document.getElementById("demo-area-02-light").className == "off") {
+    line_bot($.extend({},linebot,{message:'Turn off'}));
+  }
+});
+</script>
+
+
+</body></html>
